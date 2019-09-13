@@ -14,6 +14,7 @@ class Encounter{
 	private:
 		bool vive;
 		string texto;
+		bool combat;
 	public:
 		Encounter(){
 		}
@@ -24,6 +25,10 @@ class Encounter{
 		
 		void stop(){
 			vive=false;
+		}
+		
+		bool getCombat(){
+			return combat;
 		}
 		
 		void run(){
@@ -43,6 +48,9 @@ class Encounter{
 				cout<<chance;
 				if (chance<=80){
 					MessageBox(0,"A challenger approaches", "Warning",MB_OK);
+					combat=true;
+				}else{
+					combat=false;
 				}
 				
 				
