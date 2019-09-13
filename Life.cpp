@@ -34,6 +34,10 @@ class Life{
 			return life;
 		}
 		
+		int getMax(){
+			return max;
+		}
+		
 		void setLife(int l){
 			life=l;
 		}

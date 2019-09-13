@@ -37,8 +37,21 @@ class Encounter{
 			vive=false;
 		}
 		
+		Life getLife(){
+			return life;
+		}
+		
+		Money getMoney(){
+			return money;
+		}
+		
+		int getLevel(){
+			return level;
+		}
+		
 		void run(){
 			_beginthread(&Encounter::runner,0, static_cast<void*>(this));
+			
 		}
 		
 		static void runner(void* o){
@@ -52,16 +65,22 @@ class Encounter{
 				srand (time(NULL));
 				chance = rand() % 100 + 1;
 				cout<<chance;
-				if (chance<=80){
-					MessageBox(0,"A challenger approaches", "Warning",MB_OK);
-					money.setCombat(true);
-					life.setCombat(true); 
-					Combat combat(life.getLife(), level);
-					combat.Battle();
-					
+				if (life.getLife()>0){
+					if (chance<=80){
+						MessageBox(0,"A challenger approaches", "Warning",MB_OK);
+						money.setCombat(true);
+						life.setCombat(true); 
+						Combat combat(life.getLife(), level);
+						combat.Battle();
+						life.setLife(combat.getLife());
+						
+					}else{
+						money.setCombat(false);
+						life.setCombat(false);
+					}
 				}else{
-					money.setCombat(false);
-					life.setCombat(false);
+					cout<<"GAME OVER"<<endl;
+					stop();
 				}
 				
 				

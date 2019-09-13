@@ -14,10 +14,14 @@ int main(){
 		"2. Get +1 Life (1 money)"<<endl<<
 		"3. Exit"<<endl<<
 		"Choose an option: ";
-		cin>>op;
+		op=getch();
+		cout<<endl;
 		switch (op){
 			case '1':{
-				system("cls");
+				cout<<"Life: "<<encounter.getLife().getLife()<<endl;
+				cout<<"Money: "<<encounter.getMoney().getMoney()<<endl;
+				cout<<"Level: "<<encounter.getLevel()<<endl;
+				system("pause");
 				break;
 			}
 			case '2':{
@@ -34,7 +38,8 @@ int main(){
 			}
 		}
 	}
-	
+	encounter.getLife().stop();
+	encounter.getMoney().stop();
 	encounter.stop();
 	return 0;
 }
