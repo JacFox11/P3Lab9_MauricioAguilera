@@ -4,7 +4,10 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>  
+#include <time.h> 
+#include "Money.cpp"
+#include "Life.cpp"
+#include "Combat.cpp"
 
 #ifndef Encounter_CPP
 #define Encounter_CPP
@@ -14,9 +17,16 @@ class Encounter{
 	private:
 		bool vive;
 		string texto;
-		bool combat;
+		Money money;
+		Life life;
+		int level;
 	public:
 		Encounter(){
+			money.setVive(true);
+			money.run();
+			life.setVive(true);
+			life.run();
+			level=1;
 		}
 		
 		void setVive(bool v){
@@ -25,10 +35,6 @@ class Encounter{
 		
 		void stop(){
 			vive=false;
-		}
-		
-		bool getCombat(){
-			return combat;
 		}
 		
 		void run(){
@@ -48,9 +54,14 @@ class Encounter{
 				cout<<chance;
 				if (chance<=80){
 					MessageBox(0,"A challenger approaches", "Warning",MB_OK);
-					combat=true;
+					money.setCombat(true);
+					life.setCombat(true); 
+					Combat combat(life.getLife(), level);
+					combat.Battle();
+					
 				}else{
-					combat=false;
+					money.setCombat(false);
+					life.setCombat(false);
 				}
 				
 				
