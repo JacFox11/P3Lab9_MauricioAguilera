@@ -32,8 +32,8 @@ class Money{
 			return money;
 		}
 		
-		void setMoney(){
-			money--;
+		void setMoney(int m){
+			money=money-m;
 		}
 		
 		void setCombat(bool c){

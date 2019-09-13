@@ -17,6 +17,7 @@ class Combat{
 		int oplife;
 		Move* opmove;
 		Move* move;
+		int n;
 	public:
 		Combat(int l, int o){
 			life=l;
@@ -27,9 +28,12 @@ class Combat{
 			return life;
 		}
 		
+		int setN(int n){
+			this->n=n;
+		}
+		
 		void Battle(){
 			char ch;
-			int n;
 			while (life>0 && oplife>0){
 				system("cls");
 				cout<<"Your Life: "<<life<<setw(15)<<"Opponent's Life: "<<oplife<<endl;
@@ -37,7 +41,7 @@ class Combat{
 				"2. Paper"<<endl<<
 				"3. Scissors"<<endl<<
 				"Choose your move: ";
-				cin>>n;
+				
 				while (n<1 || n>3){
 					cout<<"Invalid move, try again"<<endl;
 					system("cls");

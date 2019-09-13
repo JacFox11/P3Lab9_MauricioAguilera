@@ -19,6 +19,7 @@ class Encounter{
 		string texto;
 		Money money;
 		Life life;
+		Combat* combat;
 		int level;
 	public:
 		Encounter(){
@@ -27,6 +28,7 @@ class Encounter{
 			life.setVive(true);
 			life.run();
 			level=1;
+			combat=new Combat(1,1);
 		}
 		
 		void setVive(bool v){
@@ -47,6 +49,10 @@ class Encounter{
 		
 		int getLevel(){
 			return level;
+		}
+		
+		Combat* getCombat(){
+			return combat;
 		}
 		
 		void run(){
@@ -70,9 +76,13 @@ class Encounter{
 						MessageBox(0,"A challenger approaches", "Warning",MB_OK);
 						money.setCombat(true);
 						life.setCombat(true); 
-						Combat combat(life.getLife(), level);
-						combat.Battle();
-						life.setLife(combat.getLife());
+						combat= new Combat(life.getLife(), level);
+						combat->Battle();
+						life.setLife(combat->getLife());
+						if (life.getLife()>0){
+							level++;
+							life.Winner();
+						}
 						
 					}else{
 						money.setCombat(false);
